@@ -41,7 +41,7 @@ button:hover {
   border-radius: 5rem;
 }
 
-.orange {
+.operator {
   background-color: #ff9500;
 }
 
@@ -62,4 +62,12 @@ button:hover {
   padding-left: 50px;
   flex-grow: 1;
   border-radius: 5rem;
+}
+
+#display {
+  margin: 0 10px 0px;
+  color: white;
+  height: 200px;
+  background-color: grey;
+  border-radius: 12px;
 }
