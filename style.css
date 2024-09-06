@@ -2,11 +2,11 @@ body {
   padding: 0;
   margin: 0;
   height: 100vh;
-  font-family: Helvetica, sans-serif;
+  font-family: "Helvetica", "arial", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #505050;
+  background-color: hsl(50, 1%, 50%);
 }
 
 #calculator {
@@ -16,6 +16,13 @@ body {
   padding: 20px 10px;
   gap: 20px;
   border-radius: 12px;
+}
+#first-row,
+#second-row,
+#third-row,
+#fourth-row,
+#fifth-row {
+  display: flex;
 }
 
 button {
@@ -30,17 +37,17 @@ button {
   cursor: pointer;
 }
 
-.light-grey {
-  background-color: hsl(60, 2%, 73%);
+.backspace {
+  background-color: hsl(60, 2%, 60%);
   color: black;
   flex-grow: 1;
   border-radius: 5rem;
 }
-.light-grey:hover {
-  background-color: hsl(60, 2%, 83%);
+.backspace:hover {
+  background-color: hsl(60, 2%, 70%);
 }
-.light-grey:active {
-  background-color: hsl(60, 2%, 100%);
+.backspace:active {
+  background-color: hsl(60, 2%, 90%);
 }
 
 .operator {
@@ -53,22 +60,20 @@ button {
   background-color: hsl(35, 100%, 70%);
 }
 
-.dark-liver {
+.numbers,
+.function,
+#equals {
   background-color: hsl(0, 0%, 31%);
 }
-.dark-liver:hover {
+.numbers:hover,
+.function:hover,
+#equals:hover {
   background-color: hsl(0, 0%, 41%);
 }
-.dark-liver:active {
+.numbers:active,
+.function:active,
+#equals:active {
   background-color: hsl(0, 0%, 51%);
-}
-
-#first-row,
-#second-row,
-#third-row,
-#fourth-row,
-#fifth-row {
-  display: flex;
 }
 
 #zero {
@@ -80,8 +85,13 @@ button {
 
 #display {
   margin: 0 10px 0px;
+  padding: 20px;
+  font-size: 30px;
   color: white;
-  height: 200px;
+  height: 100px;
   background-color: hsl(0, 0%, 20%);
   border-radius: 12px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
