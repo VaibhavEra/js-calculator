@@ -1,7 +1,7 @@
 body {
   padding: 0;
   margin: 0;
-  height: 960px;
+  height: 100vh;
   font-family: Helvetica, sans-serif;
   display: flex;
   justify-content: center;
@@ -12,7 +12,7 @@ body {
 #calculator {
   display: flex;
   flex-direction: column;
-  background-color: #1c1c1c;
+  background-color: hsl(0, 0%, 10%);
   padding: 20px 10px;
   gap: 20px;
   border-radius: 12px;
@@ -27,26 +27,40 @@ button {
   font-size: 50px;
   font-weight: 500;
   margin: 0 10px;
-}
-
-button:hover {
   cursor: pointer;
-  opacity: 0.5;
 }
 
 .light-grey {
-  background-color: #d4d4d2;
+  background-color: hsl(60, 2%, 73%);
   color: black;
   flex-grow: 1;
   border-radius: 5rem;
 }
+.light-grey:hover {
+  background-color: hsl(60, 2%, 83%);
+}
+.light-grey:active {
+  background-color: hsl(60, 2%, 100%);
+}
 
 .operator {
-  background-color: #ff9500;
+  background-color: hsl(35, 100%, 50%);
+}
+.operator:hover {
+  background-color: hsl(35, 100%, 60%);
+}
+.operator:active {
+  background-color: hsl(35, 100%, 70%);
 }
 
 .dark-liver {
-  background-color: #505050;
+  background-color: hsl(0, 0%, 31%);
+}
+.dark-liver:hover {
+  background-color: hsl(0, 0%, 41%);
+}
+.dark-liver:active {
+  background-color: hsl(0, 0%, 51%);
 }
 
 #first-row,
@@ -68,6 +82,6 @@ button:hover {
   margin: 0 10px 0px;
   color: white;
   height: 200px;
-  background-color: grey;
+  background-color: hsl(0, 0%, 20%);
   border-radius: 12px;
 }
