@@ -1,10 +1,10 @@
 // to clear display when AC button is clicked
 const allClear = document.querySelector("#ac");
 allClear.addEventListener("click", () => {
-  display.textContent = "";
-  number1 = [];
-  number2 = [];
+  number1 = "";
+  number2 = "";
   displayNumber = "";
+  changeDisplay(displayNumber);
 });
 
 const numbers = document.querySelectorAll(".numbers");
@@ -31,7 +31,7 @@ const numberList = {
   zero: 0,
 };
 
-let number1 = [];
+let number1 = "";
 let number2 = "";
 let operator = "";
 let displayNumber = "";
@@ -41,15 +41,21 @@ numbers.forEach((button) => {
   button.addEventListener("click", () => {
     for (let key in numberList) {
       if (button.id == key) {
-        number1.push(numberList[key]);
-        displayNumber = number1.join("");
+        number1 += numberList[key];
       }
     }
-    display.textContent = displayNumber;
+    changeDisplay(number1);
+    if (number2 == "") number2 = "0";
+    number2 = `${operate(number2, number1, operator)}`;
     console.log(number1);
-    console.log(displayNumber);
+    console.log(number2);
   });
 });
+
+// to display the input
+function changeDisplay(value) {
+  display.textContent = value;
+}
 
 // to take operator choice
 const buttons = document.querySelectorAll(".operator");
@@ -58,47 +64,48 @@ buttons.forEach((button) => {
     for (let key in operators) {
       if (button.id == key) operator = operators[key];
     }
-    console.log(operator);
-    number2 = number1.join("");
-    number1 = [];
+    console.log(number1);
+    console.log(number2);
+    displayNumber = number2;
+    changeDisplay(displayNumber);
+    number1 = "";
   });
 });
 
 // to run operate function on clicking equal
-equals.addEventListener("click", () => {
-  operate(number2, displayNumber, operator);
-  number1 = [];
-  number2 = [];
-});
+// equals.addEventListener("click", () => {
+//   operate(number2, displayNumber, operator);
+//   number1 = "";
+//   number2 = "";
+// });
 
 // operation functions
-function add(number1, number2) {
-  return (display.textContent = parseInt(number1) + parseInt(number2));
+function add(num1, num2) {
+  return parseFloat(num1) + parseFloat(num2);
 }
-function minus(number1, number2) {
-  return (display.textContent = parseInt(number1) - parseInt(number2));
+function minus(num1, num2) {
+  return parseFloat(num1) - parseFloat(num2);
 }
-function multiply(number1, number2) {
-  return (display.textContent = parseInt(number1) * parseInt(number2));
+function multiply(num1, num2) {
+  return parseFloat(num1) * parseFloat(num2);
 }
-function divide(number1, number2) {
-  return (display.textContent = parseInt(number1) / parseInt(number2));
+function divide(num1, num2) {
+  return parseFloat(num1) / parseFloat(num2);
 }
 
 // operate function
 function operate(num1, num2, op) {
+  // let result;
   switch (op) {
     case "+":
-      console.log(add(num1, num2));
-      break;
+      return add(num1, num2);
     case "-":
-      console.log(minus(num1, num2));
-      break;
+      return minus(num1, num2);
     case "*":
-      console.log(multiply(num1, num2));
-      break;
+      return multiply(num1, num2);
     case "/":
-      console.log(divide(num1, num2));
-      break;
+      return divide(num1, num2);
+    default:
+      return num2;
   }
 }
