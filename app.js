@@ -24,15 +24,37 @@ let number2 = "";
 let operator = "";
 let displayNumber = "";
 
-// to take number1 input and display it
+// to display the any input, output or error
+const display = document.querySelector("#display");
+function changeDisplay(value) {
+  return (display.textContent = value);
+}
+
+// to take number1 input and display i
 const numbers = document.querySelectorAll(".numbers");
 numbers.forEach((button) => {
   button.addEventListener("click", () => {
+    number1 = number1.split("");
     for (let key in numberList) {
       if (button.id == key) {
-        number1 += numberList[key];
+        if (number1[0] == 0) number1.splice(0, 1);
+        if (number1[0] == ".") number1 = ["0", "."];
+
+        number1.push(numberList[key]);
       }
     }
+    // to handle multiple decimals
+    let index = number1.indexOf(".");
+    for (let i = index + 1; i < number1.length; i++) {
+      if (number1[i] == ".") number1.splice(i, 1);
+    }
+
+    // to restrict user not to add insane values by reloading the page
+    if (number1.length >= 20)
+      if (alert("Stop!, A Calculator can only do so much\nTOP Rocks!")) {
+      } else window.location.reload();
+
+    number1 = number1.join("");
     changeDisplay(number1);
   });
 });
@@ -64,18 +86,27 @@ equalsBtn.addEventListener("click", () => {
 
 // operation functions - to operate on 2 given numbers
 function add(num1, num2) {
-  return parseFloat(num1) + parseFloat(num2);
+  return (
+    Math.round((parseFloat(num1) + parseFloat(num2)) * Math.pow(10, 2)) /
+    Math.pow(10, 2)
+  );
 }
 function minus(num1, num2) {
-  return parseFloat(num1) - parseFloat(num2);
+  return (
+    Math.round((parseFloat(num1) - parseFloat(num2)) * Math.pow(10, 2)) /
+    Math.pow(10, 2)
+  );
 }
 function multiply(num1, num2) {
-  return parseFloat(num1) * parseFloat(num2);
+  return (
+    Math.round(parseFloat(num1) * parseFloat(num2) * Math.pow(10, 2)) /
+    Math.pow(10, 2)
+  );
 }
 function divide(num1, num2) {
   return (
-    Math.round((parseFloat(num1) / parseFloat(num2)) * Math.pow(10, 4)) /
-    Math.pow(10, 4)
+    Math.round((parseFloat(num1) / parseFloat(num2)) * Math.pow(10, 2)) /
+    Math.pow(10, 2)
   );
   // return (parseFloat(num1) / parseFloat(num2)).toFixed(4);
 }
@@ -103,12 +134,6 @@ function operate(num1, num2, op) {
   }
 }
 
-// to display the any input, output or error
-const display = document.querySelector("#display");
-function changeDisplay(value) {
-  return (display.textContent = value);
-}
-
 // to clear display when AC button is clicked
 const allClear = document.querySelector("#ac");
 allClear.addEventListener("click", () => {
@@ -117,4 +142,11 @@ allClear.addEventListener("click", () => {
   operator = "";
   displayNumber = "";
   changeDisplay(displayNumber);
+});
+
+// backspace function
+const backBtn = document.querySelector("#del");
+backBtn.addEventListener("click", () => {
+  number1 = number1.slice(0, number1.length - 1);
+  changeDisplay(number1);
 });
