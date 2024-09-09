@@ -38,7 +38,7 @@ numbers.forEach((button) => {
     for (let key in numberList) {
       if (button.id == key) {
         if (number1[0] == 0) number1.splice(0, 1);
-        if (number1[0] == ".") number1 = ["0", "."];
+        if (number1[0] == ".") number1.splice(0, 1, "0.");
 
         number1.push(numberList[key]);
       }
@@ -86,27 +86,24 @@ equalsBtn.addEventListener("click", () => {
 
 // operation functions - to operate on 2 given numbers
 function add(num1, num2) {
-  return (
-    Math.round((parseFloat(num1) + parseFloat(num2)) * Math.pow(10, 2)) /
-    Math.pow(10, 2)
-  );
+  return parseFloat(num1) + parseFloat(num2);
 }
 function minus(num1, num2) {
   return (
-    Math.round((parseFloat(num1) - parseFloat(num2)) * Math.pow(10, 2)) /
-    Math.pow(10, 2)
+    Math.round((parseFloat(num1) - parseFloat(num2)) * Math.pow(10, 3)) /
+    Math.pow(10, 3)
   );
 }
 function multiply(num1, num2) {
   return (
-    Math.round(parseFloat(num1) * parseFloat(num2) * Math.pow(10, 2)) /
-    Math.pow(10, 2)
+    Math.round(parseFloat(num1) * parseFloat(num2) * Math.pow(10, 3)) /
+    Math.pow(10, 3)
   );
 }
 function divide(num1, num2) {
   return (
-    Math.round((parseFloat(num1) / parseFloat(num2)) * Math.pow(10, 2)) /
-    Math.pow(10, 2)
+    Math.round((parseFloat(num1) / parseFloat(num2)) * Math.pow(10, 3)) /
+    Math.pow(10, 3)
   );
   // return (parseFloat(num1) / parseFloat(num2)).toFixed(4);
 }
