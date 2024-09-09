@@ -7,6 +7,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: hsl(50, 1%, 50%);
+  scale: 0.75;
 }
 
 #calculator {
@@ -37,16 +38,16 @@ button {
   cursor: pointer;
 }
 
-.backspace {
+.clear {
   background-color: hsl(60, 2%, 60%);
   color: black;
   flex-grow: 1;
   border-radius: 5rem;
 }
-.backspace:hover {
+.clear:hover {
   background-color: hsl(60, 2%, 70%);
 }
-.backspace:active {
+.clear:active {
   background-color: hsl(60, 2%, 90%);
 }
 
@@ -61,17 +62,17 @@ button {
 }
 
 .numbers,
-.function,
+.backspace,
 #equals {
   background-color: hsl(0, 0%, 31%);
 }
 .numbers:hover,
-.function:hover,
+.backspace:hover,
 #equals:hover {
   background-color: hsl(0, 0%, 41%);
 }
 .numbers:active,
-.function:active,
+.backspace:active,
 #equals:active {
   background-color: hsl(0, 0%, 51%);
 }
