@@ -19,7 +19,7 @@ const numberList = {
   decimal: ".",
 };
 
-let number1 = "";
+let number1 = "0";
 let number2 = "";
 let operator = "";
 let displayNumber = "";
@@ -27,7 +27,11 @@ let displayNumber = "";
 // to display the any input, output or error
 const display = document.querySelector("#display");
 function changeDisplay(value) {
-  return (display.textContent = value);
+  display.textContent = value;
+  if (display.textContent == "Error!") {
+    if (alert("A Big Error!")) {
+    } else window.location.reload();
+  }
 }
 
 // to take number1 input and display i
@@ -78,7 +82,7 @@ buttons.forEach((button) => {
 const equalsBtn = document.querySelector("#equals");
 equalsBtn.addEventListener("click", () => {
   changeDisplay(operate(number2, number1, operator));
-  number1 = "";
+  number1 = "0";
   number2 = "";
   operator = "";
   displayNumber = "";
@@ -105,7 +109,6 @@ function divide(num1, num2) {
     Math.round((parseFloat(num1) / parseFloat(num2)) * Math.pow(10, 3)) /
     Math.pow(10, 3)
   );
-  // return (parseFloat(num1) / parseFloat(num2)).toFixed(4);
 }
 
 // operate function - to call operation functions based on operator passed
@@ -120,9 +123,7 @@ function operate(num1, num2, op) {
     case "/":
       if (num2 == 0) {
         changeDisplay("Error!");
-        console.log(display.textContent);
-        // do something else here?
-        return;
+        break;
       } else {
         return divide(num1, num2);
       }
@@ -134,11 +135,11 @@ function operate(num1, num2, op) {
 // to clear display when AC button is clicked
 const allClear = document.querySelector("#ac");
 allClear.addEventListener("click", () => {
-  number1 = "";
+  number1 = "0";
   number2 = "";
   operator = "";
   displayNumber = "";
-  changeDisplay(displayNumber);
+  changeDisplay("0");
 });
 
 // backspace function
