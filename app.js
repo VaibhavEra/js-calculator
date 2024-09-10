@@ -30,7 +30,7 @@ function changeDisplay(value) {
   display.textContent = value;
   if (display.textContent == "Error!") {
     if (alert("A Big Error!")) {
-    } else window.location.reload();
+    } else window.location.reload(); // to reload the page if divided by zero
   }
 }
 
@@ -38,11 +38,11 @@ function changeDisplay(value) {
 const numbers = document.querySelectorAll(".numbers");
 numbers.forEach((button) => {
   button.addEventListener("click", () => {
-    number1 = number1.split("");
+    number1 = number1.split(""); // to convert number1 into an array
     for (let key in numberList) {
       if (button.id == key) {
-        if (number1[0] == 0) number1.splice(0, 1);
-        if (number1[0] == ".") number1.splice(0, 1, "0.");
+        if (number1[0] == 0) number1.splice(0, 1); // to remove appending of multiple zeros
+        if (number1[0] == ".") number1.splice(0, 1, "0."); // to append zero before any decimal number
 
         number1.push(numberList[key]);
       }
@@ -55,10 +55,10 @@ numbers.forEach((button) => {
 
     // to restrict user not to add insane values by reloading the page
     if (number1.length >= 20)
-      if (alert("Stop!, A Calculator can only do so much\nTOP Rocks!")) {
+      if (alert("Stop!, A Calculator can only do so much\nTOP Rocks!")) { // easter egg for TOP peeps
       } else window.location.reload();
 
-    number1 = number1.join("");
+    number1 = number1.join(""); // to convert number1 back to string
     changeDisplay(number1);
   });
 });
@@ -67,22 +67,22 @@ numbers.forEach((button) => {
 const buttons = document.querySelectorAll(".operator");
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    if (number2 == "") number2 = "0";
+    if (number2 == "") number2 = "0"; // to handle initial case when number2 is null
     number2 = `${operate(number2, number1, operator)}`;
     for (let key in operators) {
       if (button.id == key) operator = operators[key];
     }
     displayNumber = number2;
     changeDisplay(displayNumber);
-    number1 = "";
+    number1 = ""
   });
 });
 
 // to run operate function as soon as equals button is pressed
 const equalsBtn = document.querySelector("#equals");
 equalsBtn.addEventListener("click", () => {
-  changeDisplay(operate(number2, number1, operator));
-  number1 = "0";
+  number1 = operate(number2, number1, operator); // handles calculations even after equal is pressed
+  changeDisplay(number1)
   number2 = "";
   operator = "";
   displayNumber = "";
@@ -145,6 +145,6 @@ allClear.addEventListener("click", () => {
 // backspace function
 const backBtn = document.querySelector("#del");
 backBtn.addEventListener("click", () => {
-  number1 = number1.slice(0, number1.length - 1);
+  if (number1 != "0") number1 = number1.slice(0, number1.length - 1);
   changeDisplay(number1);
 });
