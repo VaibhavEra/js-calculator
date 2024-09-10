@@ -57,7 +57,7 @@ button {
 .operator:hover {
   background-color: hsl(35, 100%, 60%);
 }
-.operator:active {
+.operator:focus {
   background-color: hsl(35, 100%, 70%);
 }
 
