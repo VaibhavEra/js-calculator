@@ -28,10 +28,6 @@ let displayNumber = "";
 const display = document.querySelector("#display");
 function changeDisplay(value) {
   display.textContent = value;
-  if (display.textContent == "Error!") {
-    if (alert("A Big Error!")) {
-    } else window.location.reload(); // to reload the page if divided by zero
-  }
 }
 
 // to take number1 input and display i
@@ -67,25 +63,35 @@ numbers.forEach((button) => {
 const buttons = document.querySelectorAll(".operator");
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    if (number2 == "") number2 = "0"; // to handle initial case when number2 is null
-    number2 = `${operate(number2, number1, operator)}`;
-    for (let key in operators) {
-      if (button.id == key) operator = operators[key];
+    if (operator !== "" && number1 === "") {
+      // Just update the operator without calculating if user presses another operator
+      for (let key in operators) {
+        if (button.id == key) operator = operators[key];
+      }
+    } else {
+      // Perform the operation only if number1 and number2 are set
+      if (number2 == "") number2 = number1; // Store number1 in number2 when pressing an operator for the first time
+      else if (number1 !== "") {
+        number2 = `${operate(number2, number1, operator)}`;
+      }
+      for (let key in operators) {
+        if (button.id == key) operator = operators[key];
+      }
+      changeDisplay(number2);
+      number1 = ""; // Reset number1 for the next input
     }
-    displayNumber = number2;
-    changeDisplay(displayNumber);
-    number1 = ""
   });
 });
 
 // to run operate function as soon as equals button is pressed
 const equalsBtn = document.querySelector("#equals");
 equalsBtn.addEventListener("click", () => {
-  number1 = operate(number2, number1, operator); // handles calculations even after equal is pressed
-  changeDisplay(number1)
-  number2 = "";
-  operator = "";
-  displayNumber = "";
+  if (operator && number1 !== "") {
+    number1 = operate(number2, number1, operator); // handles calculations when equals is pressed
+    changeDisplay(number1);
+    number2 = "";
+    operator = "";
+  }
 });
 
 // operation functions - to operate on 2 given numbers
@@ -122,8 +128,8 @@ function operate(num1, num2, op) {
       return multiply(num1, num2);
     case "/":
       if (num2 == 0) {
-        changeDisplay("Error!");
-        break;
+        changeDisplay("Snarky Error!");
+        return "Snarky Error!"
       } else {
         return divide(num1, num2);
       }
